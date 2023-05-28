@@ -14,19 +14,31 @@ public class PlayerSprite extends Sprite
     GameScreen gameScreen;
     InputHandler inputHandler;
 
+    public final int screenX;
+    public final int screenY;
+
     public PlayerSprite(GameScreen gameScreen, InputHandler inputHandler)
     {
         this.gameScreen = gameScreen;
         this.inputHandler = inputHandler;
+
+        screenX = (GameScreen.SCREEN_WIDTH / 2) - (GameScreen.TILE_SIZE / 2);
+        screenY = (gameScreen.SCREEN_HEIGHT / 2) - (GameScreen.TILE_SIZE / 2);
+
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         setDefaultValues();
     }
 
     public void setDefaultValues()
     {
-        x = 100;
-        y = 100;
-        speed = 4;
+        worldX = GameScreen.TILE_SIZE * 10;
+        worldY = GameScreen.TILE_SIZE * 10;
+        speed = 3;
         spriteFiles = Util.loadFileToHashMap();
         direction = "down";
     }
@@ -38,22 +50,40 @@ public class PlayerSprite extends Sprite
             if(inputHandler.isUp)
             {
                 direction = "up";
-                y -= speed;
+
             }
             else if(inputHandler.isDown)
             {
                 direction = "down";
-                y += speed;
             }
             else if(inputHandler.isRight)
             {
                 direction = "right";
-                x += speed;
             }
             else if(inputHandler.isLeft)
             {
                 direction = "left";
-                x -= speed;
+            }
+
+            collisionOn = false;
+            gameScreen.checkCollision.checkTile(this);
+            if(collisionOn == false)
+            {
+                switch (direction)
+                {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                }
             }
             spriteCounter++;
 
@@ -118,15 +148,15 @@ public class PlayerSprite extends Sprite
     {
         Image image = null;
         ArrayList<Image> temp = getSpritesFromDirections(Util.loadFileToHashMap(),direction);
-        System.out.println(direction);
+        System.out.println(direction + " " + worldX + " " + worldY);
         if(direction == "idle" && spriteNum > 3)
         {
             spriteNum = 0;
-            g2d.drawImage(temp.get(spriteNum),x,y,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
+            g2d.drawImage(temp.get(spriteNum), screenX, screenY,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
         }
         else
         {
-            g2d.drawImage(temp.get(spriteNum),x,y,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
+            g2d.drawImage(temp.get(spriteNum), screenX, screenY,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
         }
     }
 

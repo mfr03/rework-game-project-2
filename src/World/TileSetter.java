@@ -11,15 +11,15 @@ import java.io.InputStreamReader;
 public class TileSetter
 {
     GameScreen gameScreen;
-    Tile[] tiles;
-    int mapTileNum[][];
+    public Tile[] tiles;
+    public int mapTileNum[][];
 
     public TileSetter(GameScreen gameScreen)
     {
         this.gameScreen = gameScreen;
 
         tiles = new Tile[10];
-        mapTileNum = new int[GameScreen.DEFAULT_TILE_SIZE][GameScreen.MAX_SCREEN_ROWS];
+        mapTileNum = new int[GameScreen.MAX_WORLD_COL][GameScreen.MAX_WORLD_ROW];
         getTileImages();
         loadMap();
     }
@@ -32,6 +32,7 @@ public class TileSetter
         tiles[1].image = new ImageIcon("assets/backgrounds/grass2.png").getImage();
         tiles[2] = new Tile();
         tiles[2].image = new ImageIcon("assets/backgrounds/wall6.png").getImage();
+        tiles[2].collision = true;
     }
     public void loadMap()
     {
@@ -44,11 +45,11 @@ public class TileSetter
             int col = 0;
             int row = 0;
 
-            while(col < GameScreen.MAX_SCREEN_COLUMNS && row < GameScreen.MAX_SCREEN_ROWS)
+            while(col < GameScreen.MAX_WORLD_COL && row < GameScreen.MAX_WORLD_ROW)
             {
                 String line = br.readLine();
 
-                while(col < GameScreen.MAX_SCREEN_COLUMNS)
+                while(col < GameScreen.MAX_WORLD_COL)
                 {
                     String nums[] = line.split(" ");
 
@@ -58,7 +59,7 @@ public class TileSetter
                     col++;
                 }
 
-                if(col == GameScreen.MAX_SCREEN_COLUMNS)
+                if(col == GameScreen.MAX_WORLD_COL)
                 {
                     row++;
                     col = 0;
@@ -73,24 +74,28 @@ public class TileSetter
     }
     public void draw(Graphics2D g2d)
     {
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while(col < GameScreen.MAX_SCREEN_COLUMNS && row < GameScreen.MAX_SCREEN_ROWS)
+        while(worldCol < GameScreen.MAX_WORLD_COL && worldRow < GameScreen.MAX_WORLD_ROW)
         {
-            int tileNum = mapTileNum[col][row];
-            g2d.drawImage(tiles[tileNum].image, x,y,GameScreen.TILE_SIZE, GameScreen.TILE_SIZE, null);
-            col++;
-            x += GameScreen.TILE_SIZE;
+            int tileNum = mapTileNum[worldCol][worldRow];
 
-            if(col == GameScreen.MAX_SCREEN_COLUMNS)
+            int worldX = worldCol * GameScreen.TILE_SIZE;
+            int worldY = worldRow * GameScreen.TILE_SIZE;
+            int screenX = worldX -  gameScreen.playerSprite.worldX + gameScreen.playerSprite.screenX;
+            int screenY = worldY -  gameScreen.playerSprite.worldY + gameScreen.playerSprite.screenY;
+
+
+            g2d.drawImage(tiles[tileNum].image, screenX, screenY, GameScreen.TILE_SIZE, GameScreen.TILE_SIZE, null);
+
+
+            worldCol++;
+
+            if(worldCol == GameScreen.MAX_WORLD_COL)
             {
-                row++;
-                y += GameScreen.TILE_SIZE;
-                col = 0;
-                x = 0;
+                worldCol = 0;
+                worldRow++;
             }
         }
     }

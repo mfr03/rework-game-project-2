@@ -24,10 +24,16 @@ public class GameScreen extends JPanel implements Runnable
     InputHandler inputHandler = new InputHandler();
 
     // player default location
-    PlayerSprite playerSprite = new PlayerSprite(this, inputHandler);
+    public PlayerSprite playerSprite = new PlayerSprite(this, inputHandler);
 
     // world
+    public static final int MAX_WORLD_COL = 30;
+    public static final int MAX_WORLD_ROW = 30;
+    public final int worldWidth = TILE_SIZE * MAX_WORLD_COL;
+    public final int worldHeight = TILE_SIZE * MAX_WORLD_ROW;
     TileSetter tileSetter = new TileSetter(this);
+    public CheckCollision checkCollision = new CheckCollision(this);
+
 
 
 
