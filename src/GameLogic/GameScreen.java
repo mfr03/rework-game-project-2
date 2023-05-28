@@ -1,6 +1,7 @@
 package GameLogic;
 
 import Entity.PlayerSprite;
+import World.TileSetter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,22 +10,25 @@ public class GameScreen extends JPanel implements Runnable
 {
     public static final int DEFAULT_TILE_SIZE = 16; // 16x16 tile, standard for most 2d games
     static final int SCALING = 3;
-
     public static final int TILE_SIZE = DEFAULT_TILE_SIZE * SCALING;
 
     // world is 16 * 12, or 4 : 3 ratio
     public static final int MAX_SCREEN_COLUMNS = 16;
     public static final int MAX_SCREEN_ROWS = 12;
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMNS;
-    static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
-    final int FPS = 60;
+    public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
 
     // mechanics for game-loop
+    final int FPS = 60;
     Thread gameThread;
     InputHandler inputHandler = new InputHandler();
 
     // player default location
     PlayerSprite playerSprite = new PlayerSprite(this, inputHandler);
+
+    // world
+    TileSetter tileSetter = new TileSetter(this);
+
 
 
     public GameScreen()
@@ -91,7 +95,7 @@ public class GameScreen extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
+        tileSetter.draw(g2d);
         playerSprite.draw(g2d);
 
         g2d.dispose();
