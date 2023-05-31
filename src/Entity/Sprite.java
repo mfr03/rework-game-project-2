@@ -14,7 +14,8 @@ public class Sprite
     public int spriteCounter = 0;
     public int spriteNum = 0;
     public Rectangle solidArea;
-
+    public int solidAreaDefaultX;
+    public int solidAreaDefaultY;
     public Boolean collisionOn = false;
 
 }

@@ -2,6 +2,7 @@ package GameLogic;
 
 import Entity.PlayerSprite;
 import World.TileSetter;
+import Object.UltraGreatObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,25 +15,27 @@ public class GameScreen extends JPanel implements Runnable
 
     // world is 16 * 12, or 4 : 3 ratio
     public static final int MAX_SCREEN_COLUMNS = 16;
-    public static final int MAX_SCREEN_ROWS = 12;
+    public static final int MAX_SCREEN_ROWS = 16;
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMNS;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
 
-    // mechanics for game-loop
+    // game mechanics
     final int FPS = 60;
     Thread gameThread;
     InputHandler inputHandler = new InputHandler();
+    TileSetter tileSetter = new TileSetter(this);
+    public CheckCollision checkCollision = new CheckCollision(this);
+    public ObjectSetter objectSetter = new ObjectSetter(this);
+    public UltraGreatObject obj[] = new UltraGreatObject[10];
 
     // player default location
     public PlayerSprite playerSprite = new PlayerSprite(this, inputHandler);
 
     // world
-    public static final int MAX_WORLD_COL = 30;
-    public static final int MAX_WORLD_ROW = 30;
+    public static final int MAX_WORLD_COL = 16;
+    public static final int MAX_WORLD_ROW = 16;
     public final int worldWidth = TILE_SIZE * MAX_WORLD_COL;
     public final int worldHeight = TILE_SIZE * MAX_WORLD_ROW;
-    TileSetter tileSetter = new TileSetter(this);
-    public CheckCollision checkCollision = new CheckCollision(this);
 
 
 
@@ -48,7 +51,10 @@ public class GameScreen extends JPanel implements Runnable
         this.addKeyListener(inputHandler);
         this.setFocusable(true);
     }
-
+    public void setGame()
+    {
+        objectSetter.setObject();
+    }
     /*
     when instantiate gameThread and starting it,
     it will call run() until stop method called.
@@ -101,7 +107,17 @@ public class GameScreen extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+
         tileSetter.draw(g2d);
+
+        for(int i = 0; i < obj.length; i++)
+        {
+            if(obj[i] != null)
+            {
+                obj[i].draw(g2d,this);
+            }
+        }
+
         playerSprite.draw(g2d);
 
         g2d.dispose();

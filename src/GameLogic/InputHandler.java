@@ -6,10 +6,10 @@ import java.awt.event.KeyListener;
 public class InputHandler implements KeyListener
 {
     public boolean isUp, isDown, isLeft, isRight;
+    public boolean fKey;
     @Override
     public void keyTyped(KeyEvent e)
     {
-
     }
 
     @Override
@@ -29,6 +29,9 @@ public class InputHandler implements KeyListener
                 break;
             case KeyEvent.VK_D:
                 isRight = true;
+                break;
+            case KeyEvent.VK_F:
+                fKey = true;
                 break;
         }
     }
@@ -52,6 +55,9 @@ public class InputHandler implements KeyListener
                 break;
             case KeyEvent.VK_D:
                 isRight = false;
+                break;
+            case KeyEvent.VK_F:
+                fKey = false;
                 break;
         }
 

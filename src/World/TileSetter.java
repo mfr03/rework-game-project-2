@@ -86,9 +86,13 @@ public class TileSetter
             int screenX = worldX -  gameScreen.playerSprite.worldX + gameScreen.playerSprite.screenX;
             int screenY = worldY -  gameScreen.playerSprite.worldY + gameScreen.playerSprite.screenY;
 
-
-            g2d.drawImage(tiles[tileNum].image, screenX, screenY, GameScreen.TILE_SIZE, GameScreen.TILE_SIZE, null);
-
+            if(worldX + GameScreen.TILE_SIZE > gameScreen.playerSprite.worldX - gameScreen.playerSprite.screenX &&
+            worldX - GameScreen.TILE_SIZE < gameScreen.playerSprite.worldX + gameScreen.playerSprite.screenX &&
+            worldY + GameScreen.TILE_SIZE > gameScreen.playerSprite.worldY - gameScreen.playerSprite.screenY &&
+            worldY - GameScreen.TILE_SIZE < gameScreen.playerSprite.worldY + gameScreen.playerSprite.screenY)
+            {
+                g2d.drawImage(tiles[tileNum].image, screenX, screenY, GameScreen.TILE_SIZE, GameScreen.TILE_SIZE, null);
+            }
 
             worldCol++;
 

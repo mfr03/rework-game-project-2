@@ -11,6 +11,89 @@ public class CheckCollision
         this.gameScreen = gameScreen;
     }
 
+    public int checkObject(Sprite sprite, boolean player)
+    {
+        int index = 999;
+        for(int i = 0; i < gameScreen.obj.length; i++)
+        {
+            if(gameScreen.obj[i] != null)
+            {
+                sprite.solidArea.x = sprite.worldX + sprite.solidArea.x;
+                sprite.solidArea.y = sprite.worldY + sprite.solidArea.y;
+
+                gameScreen.obj[i].solidArea.x = gameScreen.obj[i].worldX + gameScreen.obj[i].solidArea.x;
+                gameScreen.obj[i].solidArea.y = gameScreen.obj[i].worldY + gameScreen.obj[i].solidArea.y;
+
+                switch (sprite.direction)
+                {
+                    case "up":
+                        sprite.solidArea.y -= sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "down":
+                        sprite.solidArea.y += sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "right":
+                        sprite.solidArea.x += sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "left":
+                        sprite.solidArea.x -= sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                }
+                sprite.solidArea.x = sprite.solidAreaDefaultX;
+                sprite.solidArea.y = sprite.solidAreaDefaultY;
+                gameScreen.obj[i].solidArea.x = gameScreen.obj[i].solidAreaDefaultX;
+                gameScreen.obj[i].solidArea.y = gameScreen.obj[i].solidAreaDefaultY;
+            }
+        }
+        return index;
+    }
+
+
+
     public void checkTile(Sprite sprite)
     {
         int spriteLeftWorldX = sprite.worldX + sprite.solidArea.x;
