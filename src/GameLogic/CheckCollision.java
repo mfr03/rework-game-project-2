@@ -23,13 +23,13 @@ public class CheckCollision
 
                 gameScreen.obj[i].solidArea.x = gameScreen.obj[i].worldX + gameScreen.obj[i].solidArea.x;
                 gameScreen.obj[i].solidArea.y = gameScreen.obj[i].worldY + gameScreen.obj[i].solidArea.y;
-
                 switch (sprite.direction)
                 {
                     case "up":
                         sprite.solidArea.y -= sprite.speed;
                         if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
                         {
+                            System.out.println(sprite.direction);
                             if(gameScreen.obj[i].collision)
                             {
                                 sprite.collisionOn = true;
@@ -92,7 +92,86 @@ public class CheckCollision
         return index;
     }
 
+    public int checkObjectIdle(Sprite sprite, Boolean player)
+    {
+        int index = 999;
+        for(int i = 0; i < gameScreen.obj.length; i++)
+        {
+            if(gameScreen.obj[i] != null)
+            {
+                sprite.solidArea.x = sprite.worldX + sprite.solidArea.x;
+                sprite.solidArea.y = sprite.worldY + sprite.solidArea.y;
 
+                gameScreen.obj[i].solidArea.x = gameScreen.obj[i].worldX + gameScreen.obj[i].solidArea.x;
+                gameScreen.obj[i].solidArea.y = gameScreen.obj[i].worldY + gameScreen.obj[i].solidArea.y;
+                switch (sprite.direction)
+                {
+                    case "idleTop":
+                        sprite.solidArea.y -= sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            System.out.println(sprite.direction);
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "idle":
+                        sprite.solidArea.y += sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "idleRight":
+                        sprite.solidArea.x += sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "idleLeft":
+                        sprite.solidArea.x -= sprite.speed;
+                        if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
+                        {
+                            if(gameScreen.obj[i].collision)
+                            {
+                                sprite.collisionOn = true;
+                            }
+                            if(player)
+                            {
+                                index = i;
+                            }
+                        }
+                        break;
+                }
+                sprite.solidArea.x = sprite.solidAreaDefaultX;
+                sprite.solidArea.y = sprite.solidAreaDefaultY;
+                gameScreen.obj[i].solidArea.x = gameScreen.obj[i].solidAreaDefaultX;
+                gameScreen.obj[i].solidArea.y = gameScreen.obj[i].solidAreaDefaultY;
+            }
+        }
+        return index;
+    }
 
     public void checkTile(Sprite sprite)
     {

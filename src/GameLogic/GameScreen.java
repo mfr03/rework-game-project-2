@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class GameScreen extends JPanel implements Runnable
 {
+    public static final boolean debugMode = true;
     public static final int DEFAULT_TILE_SIZE = 16; // 16x16 tile, standard for most 2d games
     static final int SCALING = 3;
     public static final int TILE_SIZE = DEFAULT_TILE_SIZE * SCALING;
@@ -95,7 +96,6 @@ public class GameScreen extends JPanel implements Runnable
             }
             if(timer >= 1000000000)
             {
-                System.out.println("FPS:" + drawCount);
                 drawCount = 0;
                 timer = 0;
             }

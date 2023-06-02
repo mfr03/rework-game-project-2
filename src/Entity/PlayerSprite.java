@@ -116,21 +116,55 @@ public class PlayerSprite extends Sprite
         }
         else
         {
-            if(direction == "down")
+            if(direction.equals("down") )
             {
                 direction = "idle";
             }
-            else if(direction == "up")
+            else if(direction.equals("up"))
             {
                 direction = "idleTop";
             }
-            else if(direction == "right")
+            else if(direction.equals("right"))
             {
                 direction = "idleRight";
             }
-            else if(direction == "left")
+            else if(direction.equals("left"))
             {
                 direction = "idleLeft";
+            }
+
+
+            int objIndex = gameScreen.checkCollision.checkObjectIdle(this,true);
+            if(objIndex != 999)
+            {
+                if(!checkNearbyPieces(objIndex))
+                {
+                    objectInteraction(objIndex);
+                }
+                else
+                {
+                    boolean[] possibleMoves = checkSurroundingPieces(objIndex);
+                    if(!possibleMoves[0] && inputHandler.upArrow)
+                    {
+                        worldY -= GameScreen.TILE_SIZE;
+                        gameScreen.obj[objIndex].worldY -= GameScreen.TILE_SIZE;
+                    }
+                    else if(!possibleMoves[1] && inputHandler.downArrow)
+                    {
+                        worldY += GameScreen.TILE_SIZE;
+                        gameScreen.obj[objIndex].worldY += GameScreen.TILE_SIZE;
+                    }
+                    else if(!possibleMoves[2] && inputHandler.rightArrow)
+                    {
+                        worldX += GameScreen.TILE_SIZE;
+                        gameScreen.obj[objIndex].worldX += GameScreen.TILE_SIZE;
+                    }
+                    else if(!possibleMoves[3] && inputHandler.leftArrow)
+                    {
+                        worldX -= GameScreen.TILE_SIZE;
+                        gameScreen.obj[objIndex].worldX -= GameScreen.TILE_SIZE;
+                    }
+                }
             }
 
             spriteCounter++;
@@ -181,32 +215,32 @@ public class PlayerSprite extends Sprite
     }
     private void movePlayer(int objectIndex)
     {
-        if(collisionOn == true)
+        if(collisionOn)
         {
             switch (direction)
             {
-                case "up":
+                case "idleTop", "up":
                     if(inputHandler.fKey)
                     {
                         worldY -= speed;
                         gameScreen.obj[objectIndex].worldY -= GameScreen.TILE_SIZE;
                     }
                     break;
-                case "down":
+                case "idle", "down":
                     if(inputHandler.fKey)
                     {
                         worldY += speed;
                         gameScreen.obj[objectIndex].worldY += GameScreen.TILE_SIZE;
                     }
                     break;
-                case "right":
+                case "idleRight", "right":
                     if(inputHandler.fKey)
                     {
                         worldX += speed;
                         gameScreen.obj[objectIndex].worldX += GameScreen.TILE_SIZE;
                     }
                     break;
-                case "left":
+                case "idleLeft", "left":
                     if(inputHandler.fKey)
                     {
                         worldX -= speed;
@@ -231,7 +265,7 @@ public class PlayerSprite extends Sprite
         boolean cantMove = false;
         switch(direction)
         {
-            case "up":
+            case "idleTop", "up":
                 for(int i = 0; i < gameScreen.obj.length; i++)
                 {
                     if(gameScreen.obj[i] != null && i != currentPiece)
@@ -246,7 +280,7 @@ public class PlayerSprite extends Sprite
                     }
                 }
                 break;
-            case "down":
+            case "idle", "down":
                 for(int i = 0; i < gameScreen.obj.length; i++)
                 {
                     if(gameScreen.obj[i] != null && i != currentPiece)
@@ -261,7 +295,7 @@ public class PlayerSprite extends Sprite
                     }
                 }
                 break;
-            case "right":
+            case "idleRight","right":
                 for(int i = 0; i < gameScreen.obj.length; i++)
                 {
                     if(gameScreen.obj[i] != null && i != currentPiece)
@@ -276,7 +310,7 @@ public class PlayerSprite extends Sprite
                     }
                 }
                 break;
-            case "left":
+            case "idleLeft", "left":
                 for(int i = 0; i < gameScreen.obj.length; i++)
                 {
                     if(gameScreen.obj[i] != null && i != currentPiece)
@@ -295,6 +329,52 @@ public class PlayerSprite extends Sprite
         return cantMove;
 
     }
+
+    private boolean[] checkSurroundingPieces(int currentPiece)
+    {
+        int currentPieceX = gameScreen.obj[currentPiece].worldX;
+        int currentPieceY = gameScreen.obj[currentPiece].worldY;
+        boolean upBlocked = false, downBlocked = false, rightBlocked = false, leftBlocked = false;
+        boolean [] res = new boolean[4];
+
+        for(int i = 0; i < gameScreen.obj.length; i++)
+        {
+            if(gameScreen.obj[i] != null && i != currentPiece)
+            {
+                if(gameScreen.obj[i].worldX == currentPieceX && gameScreen.obj[i].worldY == currentPieceY - GameScreen.TILE_SIZE)
+                {
+                    upBlocked = true;
+                    i = (i != gameScreen.obj.length) ? i++ : i;
+                }
+                if(gameScreen.obj[i].worldX == currentPieceX && gameScreen.obj[i].worldY == currentPieceY + GameScreen.TILE_SIZE)
+                {
+                    downBlocked = true;
+                    i = (i != gameScreen.obj.length) ? i++ : i;
+                }
+                if(gameScreen.obj[i].worldY == currentPieceY && gameScreen.obj[i].worldX == currentPieceX + GameScreen.TILE_SIZE)
+                {
+                    rightBlocked = true;
+                    i = (i != gameScreen.obj.length) ? i++ : i;
+                }
+                if(gameScreen.obj[i].worldY == currentPieceY && gameScreen.obj[i].worldX == currentPieceX - GameScreen.TILE_SIZE)
+                {
+                    leftBlocked = true;
+                    i = (i != gameScreen.obj.length) ? i++ : i;
+                }
+            }
+            if(upBlocked && downBlocked && rightBlocked && leftBlocked)
+            {
+                break;
+            }
+        }
+        res[0] = upBlocked;
+        res[1] = downBlocked;
+        res[2] = rightBlocked;
+        res[3] = leftBlocked;
+        return res;
+    }
+
+
 
     public void draw(Graphics2D g2d)
     {

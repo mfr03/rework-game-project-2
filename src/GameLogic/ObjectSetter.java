@@ -18,7 +18,7 @@ public class ObjectSetter
         {
             gameScreen.obj[i] = new PuzzlePiece(i);
             gameScreen.obj[i].worldX = GameScreen.TILE_SIZE * (8 + row);
-            gameScreen.obj[i].worldY = GameScreen.TILE_SIZE * (8 + col);
+            gameScreen.obj[i].worldY = GameScreen.TILE_SIZE * (6 + col);
             row++;
             if(row == 1)
             {
