@@ -196,6 +196,10 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
+                    if(tileNum1 == 3 || tileNum2 == 3)
+                    {
+                        gameScreen.playerSprite.finished = true;
+                    }
                 }
                 break;
             case "down":
@@ -205,6 +209,10 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
+                    if(tileNum1 == 3 || tileNum2 == 3)
+                    {
+                        gameScreen.playerSprite.finished = true;
+                    }
                 }
                 break;
             case "left":
@@ -214,6 +222,10 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
+                    if(tileNum1 == 3 || tileNum2 == 3)
+                    {
+                        gameScreen.playerSprite.finished = true;
+                    }
                 }
                 break;
             case "right":
@@ -223,6 +235,10 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
+                    if(tileNum1 == 3 || tileNum2 == 3)
+                    {
+                        gameScreen.playerSprite.finished = true;
+                    }
                 }
                 break;
         }

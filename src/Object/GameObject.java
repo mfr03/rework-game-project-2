@@ -14,6 +14,7 @@ public class GameObject
     public int solidAreaDefaultY = 0;
     public int worldX, worldY;
 
+
     public void draw(Graphics2D g2d, GameScreen gameScreen)
     {
         int screenX = worldX -  gameScreen.playerSprite.worldX + gameScreen.playerSprite.screenX;

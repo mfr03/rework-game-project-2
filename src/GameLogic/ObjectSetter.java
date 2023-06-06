@@ -1,5 +1,5 @@
 package GameLogic;
-import Object.PuzzlePiece;
+import Object.*;
 public class ObjectSetter
 {
     GameScreen gameScreen;
@@ -14,18 +14,13 @@ public class ObjectSetter
         int row = 0;
         int col = 0;
 
-        for(int i = 0; i < 8; i++)
-        {
-            gameScreen.obj[i] = new PuzzlePiece(i);
-            gameScreen.obj[i].worldX = GameScreen.TILE_SIZE * (8 + row);
-            gameScreen.obj[i].worldY = GameScreen.TILE_SIZE * (6 + col);
-            row++;
-            if(row == 1)
-            {
-                row = 0;
-                col++;
-            }
-        }
+        gameScreen.obj[1] = new MovingObstacles(1);
+        gameScreen.obj[1].worldX = 8 * GameScreen.TILE_SIZE;
+        gameScreen.obj[1].worldY = 12 * GameScreen.TILE_SIZE;
+        gameScreen.obj[2] = new MovingObstacles(2);
+        gameScreen.obj[2].worldX = 7 * GameScreen.TILE_SIZE;
+        gameScreen.obj[2].worldY = 9 * GameScreen.TILE_SIZE;
+
 
     }
 }

@@ -33,6 +33,9 @@ public class TileSetter
         tiles[2] = new Tile();
         tiles[2].image = new ImageIcon("assets/backgrounds/wall6.png").getImage();
         tiles[2].collision = true;
+        tiles[3] = new Tile();
+        tiles[3].image = new ImageIcon("assets/2770921.png").getImage();
+        tiles[3].collision = true;
     }
     public void loadMap()
     {

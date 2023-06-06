@@ -2,7 +2,7 @@ package GameLogic;
 
 import Entity.PlayerSprite;
 import World.TileSetter;
-import Object.GameObject;
+import Object.MovingObstacles;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,8 @@ public class GameScreen extends JPanel implements Runnable
     TileSetter tileSetter = new TileSetter(this);
     public CheckCollision checkCollision = new CheckCollision(this);
     public ObjectSetter objectSetter = new ObjectSetter(this);
-    public GameObject obj[] = new GameObject[10];
+
+    public MovingObstacles obj[] = new MovingObstacles[10];
 
     // player default location
     public PlayerSprite playerSprite = new PlayerSprite(this, inputHandler);
@@ -109,10 +110,12 @@ public class GameScreen extends JPanel implements Runnable
 
         tileSetter.draw(g2d);
 
+
         for(int i = 0; i < obj.length; i++)
         {
             if(obj[i] != null)
             {
+                obj[i].moveObj(obj[i]);
                 obj[i].draw(g2d,this);
             }
         }
