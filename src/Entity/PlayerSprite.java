@@ -212,7 +212,7 @@ public class PlayerSprite extends Sprite
             {
                 case "idleTop", "up" ->
                 {
-                    if (inputHandler.fKey)
+                    if (inputHandler.fKey || inputHandler.upArrow)
                     {
                         worldY -= speed;
                         gameScreen.obj[objectIndex].worldY -= GameScreen.TILE_SIZE;
@@ -220,7 +220,7 @@ public class PlayerSprite extends Sprite
                 }
                 case "idle", "down" ->
                 {
-                    if (inputHandler.fKey)
+                    if (inputHandler.fKey || inputHandler.downArrow)
                     {
                         worldY += speed;
                         gameScreen.obj[objectIndex].worldY += GameScreen.TILE_SIZE;
@@ -228,7 +228,7 @@ public class PlayerSprite extends Sprite
                 }
                 case "idleRight", "right" ->
                 {
-                    if (inputHandler.fKey)
+                    if (inputHandler.fKey || inputHandler.rightArrow)
                     {
                         worldX += speed;
                         gameScreen.obj[objectIndex].worldX += GameScreen.TILE_SIZE;
@@ -236,7 +236,7 @@ public class PlayerSprite extends Sprite
                 }
                 case "idleLeft", "left" ->
                 {
-                    if (inputHandler.fKey)
+                    if (inputHandler.fKey || inputHandler.leftArrow)
                     {
                         worldX -= speed;
                         gameScreen.obj[objectIndex].worldX -= GameScreen.TILE_SIZE;
