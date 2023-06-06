@@ -2,14 +2,13 @@ package GameLogic;
 
 import Entity.PlayerSprite;
 import World.TileSetter;
-import Object.UltraGreatObject;
+import Object.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameScreen extends JPanel implements Runnable
 {
-    public static final boolean debugMode = true;
     public static final int DEFAULT_TILE_SIZE = 16; // 16x16 tile, standard for most 2d games
     static final int SCALING = 3;
     public static final int TILE_SIZE = DEFAULT_TILE_SIZE * SCALING;
@@ -27,14 +26,14 @@ public class GameScreen extends JPanel implements Runnable
     TileSetter tileSetter = new TileSetter(this);
     public CheckCollision checkCollision = new CheckCollision(this);
     public ObjectSetter objectSetter = new ObjectSetter(this);
-    public UltraGreatObject obj[] = new UltraGreatObject[10];
+    public GameObject obj[] = new GameObject[10];
 
     // player default location
     public PlayerSprite playerSprite = new PlayerSprite(this, inputHandler);
 
     // world
-    public static final int MAX_WORLD_COL = 16;
-    public static final int MAX_WORLD_ROW = 16;
+    public static final int MAX_WORLD_COL = 20;
+    public static final int MAX_WORLD_ROW = 20;
     public final int worldWidth = TILE_SIZE * MAX_WORLD_COL;
     public final int worldHeight = TILE_SIZE * MAX_WORLD_ROW;
 

@@ -86,10 +86,36 @@ public class TileSetter
             int screenX = worldX -  gameScreen.playerSprite.worldX + gameScreen.playerSprite.screenX;
             int screenY = worldY -  gameScreen.playerSprite.worldY + gameScreen.playerSprite.screenY;
 
+            if(gameScreen.playerSprite.screenX > gameScreen.playerSprite.worldX)
+            {
+                screenX = worldX;
+            }
+            if(gameScreen.playerSprite.screenY > gameScreen.playerSprite.worldY)
+            {
+                screenY = worldY;
+            }
+            int rightWorldBorder = GameScreen.SCREEN_WIDTH - gameScreen.playerSprite.screenX;
+            if(rightWorldBorder > gameScreen.worldWidth - gameScreen.playerSprite.worldX)
+            {
+                screenX = GameScreen.SCREEN_WIDTH - (gameScreen.worldWidth - worldX);
+            }
+            int bottomWorldBorder = GameScreen.SCREEN_HEIGHT - gameScreen.playerSprite.screenY;
+            if(bottomWorldBorder > gameScreen.worldWidth - gameScreen.playerSprite.worldY)
+            {
+                screenY = GameScreen.SCREEN_HEIGHT - (gameScreen.worldHeight - worldY);
+            }
+
             if(worldX + GameScreen.TILE_SIZE > gameScreen.playerSprite.worldX - gameScreen.playerSprite.screenX &&
             worldX - GameScreen.TILE_SIZE < gameScreen.playerSprite.worldX + gameScreen.playerSprite.screenX &&
             worldY + GameScreen.TILE_SIZE > gameScreen.playerSprite.worldY - gameScreen.playerSprite.screenY &&
             worldY - GameScreen.TILE_SIZE < gameScreen.playerSprite.worldY + gameScreen.playerSprite.screenY)
+            {
+                g2d.drawImage(tiles[tileNum].image, screenX, screenY, GameScreen.TILE_SIZE, GameScreen.TILE_SIZE, null);
+            }
+            else if(gameScreen.playerSprite.screenX > gameScreen.playerSprite.worldX ||
+                    gameScreen.playerSprite.screenY > gameScreen.playerSprite.worldY ||
+                    rightWorldBorder > gameScreen.worldWidth - gameScreen.playerSprite.worldX ||
+                    bottomWorldBorder > gameScreen.worldWidth - gameScreen.playerSprite.worldY)
             {
                 g2d.drawImage(tiles[tileNum].image, screenX, screenY, GameScreen.TILE_SIZE, GameScreen.TILE_SIZE, null);
             }

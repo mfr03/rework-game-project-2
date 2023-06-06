@@ -2,7 +2,7 @@ package Object;
 
 import javax.swing.*;
 
-public class PuzzlePiece extends UltraGreatObject
+public class PuzzlePiece extends GameObject
 {
     public PuzzlePiece(int num)
     {

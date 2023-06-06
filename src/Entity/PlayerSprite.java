@@ -1,6 +1,4 @@
 package Entity;
-
-
 import GameLogic.GameScreen;
 import GameLogic.InputHandler;
 import Utilities.Util;
@@ -144,6 +142,7 @@ public class PlayerSprite extends Sprite
                 else
                 {
                     boolean[] possibleMoves = checkSurroundingPieces(objIndex);
+                    // need to add another possibilites where you dont need to move character sprite while moving the objects
                     if(!possibleMoves[0] && inputHandler.upArrow)
                     {
                         worldY -= GameScreen.TILE_SIZE;
@@ -168,7 +167,7 @@ public class PlayerSprite extends Sprite
             }
 
             spriteCounter++;
-            if(spriteCounter > 20) // for every 20 frames
+            if(spriteCounter > 20) // for every 20 frames (1/3 s)
             {
                 if(spriteNum == 0)
                 {
@@ -198,18 +197,10 @@ public class PlayerSprite extends Sprite
         {
             switch (direction)
             {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "right" -> worldX += speed;
+                case "left" -> worldX -= speed;
             }
         }
     }
@@ -219,34 +210,38 @@ public class PlayerSprite extends Sprite
         {
             switch (direction)
             {
-                case "idleTop", "up":
-                    if(inputHandler.fKey)
+                case "idleTop", "up" ->
+                {
+                    if (inputHandler.fKey)
                     {
                         worldY -= speed;
                         gameScreen.obj[objectIndex].worldY -= GameScreen.TILE_SIZE;
                     }
-                    break;
-                case "idle", "down":
-                    if(inputHandler.fKey)
+                }
+                case "idle", "down" ->
+                {
+                    if (inputHandler.fKey)
                     {
                         worldY += speed;
                         gameScreen.obj[objectIndex].worldY += GameScreen.TILE_SIZE;
                     }
-                    break;
-                case "idleRight", "right":
-                    if(inputHandler.fKey)
+                }
+                case "idleRight", "right" ->
+                {
+                    if (inputHandler.fKey)
                     {
                         worldX += speed;
                         gameScreen.obj[objectIndex].worldX += GameScreen.TILE_SIZE;
                     }
-                    break;
-                case "idleLeft", "left":
-                    if(inputHandler.fKey)
+                }
+                case "idleLeft", "left" ->
+                {
+                    if (inputHandler.fKey)
                     {
                         worldX -= speed;
                         gameScreen.obj[objectIndex].worldX -= GameScreen.TILE_SIZE;
                     }
-                    break;
+                }
             }
         }
     }
@@ -263,14 +258,15 @@ public class PlayerSprite extends Sprite
         int currentPieceX = gameScreen.obj[currentPiece].worldX;
         int currentPieceY = gameScreen.obj[currentPiece].worldY;
         boolean cantMove = false;
-        switch(direction)
+        switch (direction)
         {
-            case "idleTop", "up":
-                for(int i = 0; i < gameScreen.obj.length; i++)
+            case "idleTop", "up" ->
+            {
+                for (int i = 0; i < gameScreen.obj.length; i++)
                 {
-                    if(gameScreen.obj[i] != null && i != currentPiece)
+                    if (gameScreen.obj[i] != null && i != currentPiece)
                     {
-                        if(gameScreen.obj[i].worldX == currentPieceX && gameScreen.obj[i].worldY == currentPieceY - GameScreen.TILE_SIZE)
+                        if (gameScreen.obj[i].worldX == currentPieceX && gameScreen.obj[i].worldY == currentPieceY - GameScreen.TILE_SIZE)
                         {
                             cantMove = true;
                             System.out.println("cant move" + direction);
@@ -279,13 +275,14 @@ public class PlayerSprite extends Sprite
                         }
                     }
                 }
-                break;
-            case "idle", "down":
-                for(int i = 0; i < gameScreen.obj.length; i++)
+            }
+            case "idle", "down" ->
+            {
+                for (int i = 0; i < gameScreen.obj.length; i++)
                 {
-                    if(gameScreen.obj[i] != null && i != currentPiece)
+                    if (gameScreen.obj[i] != null && i != currentPiece)
                     {
-                        if(gameScreen.obj[i].worldX == currentPieceX && gameScreen.obj[i].worldY == currentPieceY + GameScreen.TILE_SIZE)
+                        if (gameScreen.obj[i].worldX == currentPieceX && gameScreen.obj[i].worldY == currentPieceY + GameScreen.TILE_SIZE)
                         {
                             cantMove = true;
                             System.out.println("cant move" + direction);
@@ -294,13 +291,14 @@ public class PlayerSprite extends Sprite
                         }
                     }
                 }
-                break;
-            case "idleRight","right":
-                for(int i = 0; i < gameScreen.obj.length; i++)
+            }
+            case "idleRight", "right" ->
+            {
+                for (int i = 0; i < gameScreen.obj.length; i++)
                 {
-                    if(gameScreen.obj[i] != null && i != currentPiece)
+                    if (gameScreen.obj[i] != null && i != currentPiece)
                     {
-                        if(gameScreen.obj[i].worldY == currentPieceY && gameScreen.obj[i].worldX == currentPieceX + GameScreen.TILE_SIZE)
+                        if (gameScreen.obj[i].worldY == currentPieceY && gameScreen.obj[i].worldX == currentPieceX + GameScreen.TILE_SIZE)
                         {
                             cantMove = true;
                             System.out.println("cant move" + direction + " " + i);
@@ -309,13 +307,14 @@ public class PlayerSprite extends Sprite
                         }
                     }
                 }
-                break;
-            case "idleLeft", "left":
-                for(int i = 0; i < gameScreen.obj.length; i++)
+            }
+            case "idleLeft", "left" ->
+            {
+                for (int i = 0; i < gameScreen.obj.length; i++)
                 {
-                    if(gameScreen.obj[i] != null && i != currentPiece)
+                    if (gameScreen.obj[i] != null && i != currentPiece)
                     {
-                        if(gameScreen.obj[i].worldY == currentPieceY && gameScreen.obj[i].worldX == currentPieceX - GameScreen.TILE_SIZE)
+                        if (gameScreen.obj[i].worldY == currentPieceY && gameScreen.obj[i].worldX == currentPieceX - GameScreen.TILE_SIZE)
                         {
                             cantMove = true;
                             System.out.println("cant move" + direction);
@@ -324,7 +323,7 @@ public class PlayerSprite extends Sprite
                         }
                     }
                 }
-                break;
+            }
         }
         return cantMove;
 
@@ -380,39 +379,51 @@ public class PlayerSprite extends Sprite
     {
         Image image = null;
         ArrayList<Image> temp = getSpritesFromDirections(Util.loadFileToHashMap(),direction);
-//        System.out.println(direction + " " + worldX + " " + worldY);
+        int x = screenX;
+        int y = screenY;
+        if(screenX > worldX)
+        {
+            x  = worldX;
+        }
+        if(screenY > worldY)
+        {
+            y = worldY;
+        }
+        int rightWorldBorder = GameScreen.SCREEN_WIDTH - screenX;
+        if(rightWorldBorder > gameScreen.worldWidth - worldX)
+        {
+            x = GameScreen.SCREEN_WIDTH - (gameScreen.worldWidth - worldX);
+        }
+        int bottomWorldBorder = GameScreen.SCREEN_HEIGHT - screenY;
+        if(bottomWorldBorder > gameScreen.worldWidth - worldY)
+        {
+            y = GameScreen.SCREEN_HEIGHT - (gameScreen.worldHeight - worldY);
+        }
+
         if((direction == "idle" || direction == "idleTop" || direction == "idleRight" || direction == "idleLeft") && spriteNum > 3)
         {
             spriteNum = 0;
-            g2d.drawImage(temp.get(spriteNum), screenX, screenY,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
+            g2d.drawImage(temp.get(spriteNum), x, y,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
         }
         else
         {
-            g2d.drawImage(temp.get(spriteNum), screenX, screenY,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
+            g2d.drawImage(temp.get(spriteNum), x, y,GameScreen.TILE_SIZE,GameScreen.TILE_SIZE,null);
         }
     }
 
     private ArrayList<Image> getSpritesFromDirections(Map<String, ArrayList<Image>> spriteFiles, String direction)
     {
-        switch (direction)
-        {
-            case "up":
-                return spriteFiles.get("WalkUp");
-            case "down":
-                return spriteFiles.get("Walk");
-            case "right":
-                return spriteFiles.get("WalkRight");
-            case "left":
-                return spriteFiles.get("WalkLeft");
-            case "idle":
-                return spriteFiles.get("Idle");
-            case "idleTop":
-                return spriteFiles.get("IdleTop");
-            case "idleRight":
-                return spriteFiles.get("IdleRight");
-            case "idleLeft":
-                return spriteFiles.get("IdleLeft");
-        }
-        return null;
+        return switch (direction)
+                {
+                    case "up" -> spriteFiles.get("WalkUp");
+                    case "down" -> spriteFiles.get("Walk");
+                    case "right" -> spriteFiles.get("WalkRight");
+                    case "left" -> spriteFiles.get("WalkLeft");
+                    case "idle" -> spriteFiles.get("Idle");
+                    case "idleTop" -> spriteFiles.get("IdleTop");
+                    case "idleRight" -> spriteFiles.get("IdleRight");
+                    case "idleLeft" -> spriteFiles.get("IdleLeft");
+                    default -> null;
+                };
     }
 }
