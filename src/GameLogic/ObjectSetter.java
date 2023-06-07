@@ -20,7 +20,7 @@ public class ObjectSetter
 
         gameScreen.obj[2] = new MovingObstacles(2);
         gameScreen.obj[2].worldX = 7 * GameScreen.TILE_SIZE;
-        gameScreen.obj[2].worldY = 9 * GameScreen.TILE_SIZE;
+        gameScreen.obj[2].worldY = 11 * GameScreen.TILE_SIZE;
 
 
     }

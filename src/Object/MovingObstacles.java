@@ -7,8 +7,7 @@ import javax.swing.*;
 public class MovingObstacles extends GameObject
 {
     boolean reverse = true;
-    int destination = 13 * GameScreen.TILE_SIZE;
-
+    int destination;
     public MovingObstacles(int num)
     {
         name = "puzzle piece";
@@ -19,14 +18,19 @@ public class MovingObstacles extends GameObject
 
     public void moveObj(GameObject objs[], int i)
     {
+        if(i == 1 || i == 2)
+        {
+            destination = 14 * GameScreen.TILE_SIZE;
+        }
+
         if(reverse)
         {
-            if(objs[i].worldY <= destination - (GameScreen.TILE_SIZE * 4))
+            if(objs[i].worldY <= destination - (GameScreen.TILE_SIZE * 3))
             {
                 reverse = false;
             } else
             {
-                objs[i].worldY -= 4;
+                objs[i].worldY -= 3;
             }
         }
         else
@@ -37,7 +41,7 @@ public class MovingObstacles extends GameObject
             }
             else
             {
-                objs[i].worldY += 4;
+                objs[i].worldY += 3;
             }
         }
     }
