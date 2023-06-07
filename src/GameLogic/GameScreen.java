@@ -15,7 +15,7 @@ public class GameScreen extends JPanel implements Runnable
 
     // world is 16 * 12, or 4 : 3 ratio
     public static final int MAX_SCREEN_COLUMNS = 16;
-    public static final int MAX_SCREEN_ROWS = 16;
+    public static final int MAX_SCREEN_ROWS = 12;
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMNS;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
 
@@ -27,7 +27,7 @@ public class GameScreen extends JPanel implements Runnable
     public CheckCollision checkCollision = new CheckCollision(this);
     public ObjectSetter objectSetter = new ObjectSetter(this);
 
-    public MovingObstacles obj[] = new MovingObstacles[10];
+    public MovingObstacles obj[] = new MovingObstacles[20];
 
     // player default location
     public PlayerSprite playerSprite = new PlayerSprite(this, inputHandler);
@@ -115,7 +115,7 @@ public class GameScreen extends JPanel implements Runnable
         {
             if(obj[i] != null)
             {
-                obj[i].moveObj(obj[i]);
+                obj[i].moveObj(obj, i);
                 obj[i].draw(g2d,this);
             }
         }

@@ -17,27 +17,27 @@ public class MovingObstacles extends GameObject
         collision = true;
     }
 
-    public void moveObj(GameObject obj)
+    public void moveObj(GameObject objs[], int i)
     {
         if(reverse)
         {
-            if(obj.worldY <= destination - (GameScreen.TILE_SIZE * 4))
+            if(objs[i].worldY <= destination - (GameScreen.TILE_SIZE * 4))
             {
                 reverse = false;
             } else
             {
-                obj.worldY -= 4;
+                objs[i].worldY -= 4;
             }
         }
         else
         {
-            if(obj.worldY >= destination)
+            if(objs[i].worldY >= destination)
             {
                 reverse = true;
             }
             else
             {
-                obj.worldY += 4;
+                objs[i].worldY += 4;
             }
         }
     }
