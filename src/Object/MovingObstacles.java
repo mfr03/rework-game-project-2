@@ -18,6 +18,14 @@ public class MovingObstacles extends GameObject
         image = new ImageIcon(path + num + ".png").getImage();
         collision = true;
         this.num = num;
+
+        if (num == 9 || num == 10) {
+            solidAreaDefaultX = 15;
+            solidAreaDefaultY = 9;
+            solidArea.width = 13;
+            solidArea.height = 21;
+
+        }
     }
 
     public void moveObj(GameObject objs[], int i)
