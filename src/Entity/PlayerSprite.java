@@ -37,13 +37,17 @@ public class PlayerSprite extends Sprite
 
     public void setDefaultValues()
     {
-        worldX = GameScreen.TILE_SIZE * 2;
-        worldY = GameScreen.TILE_SIZE * 2;
+//        worldX = GameScreen.TILE_SIZE * 2;
+//        worldY = GameScreen.TILE_SIZE * 2;
         speed = 4;
         spriteFiles = Util.loadFileToHashMap();
         isPepsi = false;
         finished = false;
         direction = "down";
+
+        //map33
+        worldX = GameScreen.TILE_SIZE * 2;
+        worldY = GameScreen.TILE_SIZE * 17;
     }
 
     public void update()
@@ -241,9 +245,13 @@ public class PlayerSprite extends Sprite
 
     private void respawnPlayer()
     {
-        worldX = GameScreen.TILE_SIZE * 2;
-        worldY = GameScreen.TILE_SIZE * 2;
+//        worldX = GameScreen.TILE_SIZE * 2;
+//        worldY = GameScreen.TILE_SIZE * 2;
         isPepsi = false;
+
+        //map33
+        worldX = GameScreen.TILE_SIZE * 2;
+        worldY = GameScreen.TILE_SIZE * 17;
     }
 
 

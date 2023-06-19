@@ -18,7 +18,7 @@ public class TileSetter
     {
         this.gameScreen = gameScreen;
 
-        tiles = new Tile[10];
+        tiles = new Tile[30];
         mapTileNum = new int[GameScreen.MAX_WORLD_COL][GameScreen.MAX_WORLD_ROW];
         getTileImages();
         loadMap();
@@ -36,12 +36,52 @@ public class TileSetter
         tiles[3] = new Tile();
         tiles[3].image = new ImageIcon("assets/2770921.png").getImage();
         tiles[3].collision = true;
+        tiles[15] = new Tile();
+        tiles[15].image = new ImageIcon("assets/backgrounds/floor_1.png").getImage();
+        tiles[16] = new Tile();
+        tiles[16].image = new ImageIcon("assets/backgrounds/wall_left_corner.png").getImage();
+        tiles[16].collision = true;
+        tiles[17] = new Tile();
+        tiles[17].image = new ImageIcon("assets/backgrounds/wall_right_corner.png").getImage();
+        tiles[17].collision = true;
+        tiles[18] = new Tile();
+        tiles[18].image = new ImageIcon("assets/backgrounds/floor_ladder.png").getImage();
+        tiles[18].collision = true;
+        tiles[20] = new Tile();
+        tiles[20].image = new ImageIcon("assets/backgrounds/wall_left_end.png").getImage();
+        tiles[20].collision = true;
+        tiles[21] = new Tile();
+        tiles[21].image = new ImageIcon("assets/backgrounds/wall_mid.png").getImage();
+        tiles[21].collision = true;
+        tiles[22] = new Tile();
+        tiles[22].image = new ImageIcon("assets/backgrounds/wall_right_end.png").getImage();
+        tiles[22].collision = true;
+        tiles[23] = new Tile();
+        tiles[23].image = new ImageIcon("assets/backgrounds/wall_right_side.png").getImage();
+        tiles[23].collision = true;
+        tiles[24] = new Tile();
+        tiles[24].image = new ImageIcon("assets/backgrounds/wall_left_side.png").getImage();
+        tiles[24].collision = true;
+        tiles[25] = new Tile();
+        tiles[25].image = new ImageIcon("assets/backgrounds/wall_mid_left.png").getImage();
+        tiles[25].collision = true;
+        tiles[26] = new Tile();
+        tiles[26].image = new ImageIcon("assets/backgrounds/wall_both_end.png").getImage();
+        tiles[26].collision = true;
+        tiles[27] = new Tile();
+        tiles[27].image = new ImageIcon("assets/backgrounds/wall_mid_right.png").getImage();
+        tiles[27].collision = true;
+        tiles[28] = new Tile();
+        tiles[28].image = new ImageIcon("assets/backgrounds/wall_both_side.png").getImage();
+        tiles[28].collision = true;
+        tiles[29] = new Tile();
+        tiles[29].image = new ImageIcon("assets/backgrounds/void.png").getImage();
     }
     public void loadMap()
     {
         try
         {
-            InputStream is =getClass().getResourceAsStream("tileArrangement.txt");
+            InputStream is =getClass().getResourceAsStream("map33.txt");
 
             BufferedReader br = new BufferedReader( new InputStreamReader(is));
 

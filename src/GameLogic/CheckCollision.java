@@ -196,7 +196,7 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
-                    if(tileNum1 == 3 || tileNum2 == 3)
+                    if(tileNum1 == 3 || tileNum2 == 3 || tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
                     }
@@ -209,7 +209,7 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
-                    if(tileNum1 == 3 || tileNum2 == 3)
+                    if(tileNum1 == 3 || tileNum2 == 3 || tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
                     }
@@ -222,7 +222,7 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
-                    if(tileNum1 == 3 || tileNum2 == 3)
+                    if(tileNum1 == 3 || tileNum2 == 3 || tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
                     }
@@ -235,7 +235,7 @@ public class CheckCollision
                 if(gameScreen.tileSetter.tiles[tileNum1].collision || gameScreen.tileSetter.tiles[tileNum2].collision)
                 {
                     sprite.collisionOn = true;
-                    if(tileNum1 == 3 || tileNum2 == 3)
+                    if(tileNum1 == 3 || tileNum2 == 3 || tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
                     }
