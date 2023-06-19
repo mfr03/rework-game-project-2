@@ -30,32 +30,7 @@ public class MovingObstacles extends GameObject
 
     public void moveObj(GameObject objs[], int i)
     {
-//        if(i == 1 || i == 2)
-//        {
-//            destination = 14 * GameScreen.TILE_SIZE;
-//        }
-//
-//        if(reverse)
-//        {
-//            if(objs[i].worldY <= destination - (GameScreen.TILE_SIZE * 3))
-//            {
-//                reverse = false;
-//            } else
-//            {
-//                objs[i].worldY -= 3;
-//            }
-//        }
-//        else
-//        {
-//            if(objs[i].worldY >= destination)
-//            {
-//                reverse = true;
-//            }
-//            else
-//            {
-//                objs[i].worldY += 3;
-//            }
-//        }
+
 
         if(num == 9)
         {

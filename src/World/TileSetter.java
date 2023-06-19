@@ -81,7 +81,46 @@ public class TileSetter
     {
         try
         {
-            InputStream is =getClass().getResourceAsStream("map33.txt");
+            InputStream is =getClass().getResourceAsStream("ulana.txt");
+
+            BufferedReader br = new BufferedReader( new InputStreamReader(is));
+
+            int col = 0;
+            int row = 0;
+
+            while(col < GameScreen.MAX_WORLD_COL && row < GameScreen.MAX_WORLD_ROW)
+            {
+                String line = br.readLine();
+
+                while(col < GameScreen.MAX_WORLD_COL)
+                {
+                    String nums[] = line.split(" ");
+
+                    int num = Integer.parseInt(nums[col]);
+
+                    mapTileNum[col][row] = num;
+                    col++;
+                }
+
+                if(col == GameScreen.MAX_WORLD_COL)
+                {
+                    row++;
+                    col = 0;
+                }
+            }
+            br.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadMap(String levelPath)
+    {
+        try
+        {
+            InputStream is =getClass().getResourceAsStream(levelPath + ".txt");
 
             BufferedReader br = new BufferedReader( new InputStreamReader(is));
 

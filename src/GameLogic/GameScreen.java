@@ -20,10 +20,11 @@ public class GameScreen extends JPanel implements Runnable
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
 
     // game mechanics
+    public String nextLevel = "viko";
     final int FPS = 60;
     Thread gameThread;
     InputHandler inputHandler = new InputHandler();
-    TileSetter tileSetter = new TileSetter(this);
+    public TileSetter tileSetter = new TileSetter(this);
     public CheckCollision checkCollision = new CheckCollision(this);
     public ObjectSetter objectSetter = new ObjectSetter(this);
 
@@ -37,7 +38,6 @@ public class GameScreen extends JPanel implements Runnable
     public static final int MAX_WORLD_ROW = 20;
     public final int worldWidth = TILE_SIZE * MAX_WORLD_COL;
     public final int worldHeight = TILE_SIZE * MAX_WORLD_ROW;
-
 
 
 
@@ -110,7 +110,6 @@ public class GameScreen extends JPanel implements Runnable
 
         tileSetter.draw(g2d);
 
-
         for(int i = 0; i < obj.length; i++)
         {
             if(obj[i] != null)
@@ -119,7 +118,8 @@ public class GameScreen extends JPanel implements Runnable
                 obj[i].draw(g2d,this);
             }
         }
-
+        System.out.println(playerSprite.finished);
+        System.out.println(playerSprite.collisionOn);
         playerSprite.draw(g2d);
 
         g2d.dispose();
