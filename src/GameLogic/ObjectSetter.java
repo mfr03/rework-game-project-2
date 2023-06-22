@@ -99,16 +99,16 @@ public class ObjectSetter
             gameScreen.obj[4]=new MovingObstacles(9);
             gameScreen.obj[4].worldX = 4 * GameScreen.TILE_SIZE;
             gameScreen.obj[4].worldY = 7 * GameScreen.TILE_SIZE;
-            gameScreen.obj[5]=new MovingObstacles(9);
+            gameScreen.obj[5]=new MovingObstacles(11);
             gameScreen.obj[5].worldY = 3 * GameScreen.TILE_SIZE;
             gameScreen.obj[5].worldX = 16 * GameScreen.TILE_SIZE;
-            gameScreen.obj[6]=new MovingObstacles(9);
+            gameScreen.obj[6]=new MovingObstacles(11);
             gameScreen.obj[6].worldY = 7 * GameScreen.TILE_SIZE;
             gameScreen.obj[6].worldX = 16 * GameScreen.TILE_SIZE;
-            gameScreen.obj[7]=new MovingObstacles(9);
+            gameScreen.obj[7]=new MovingObstacles(11);
             gameScreen.obj[7].worldY = 6 * GameScreen.TILE_SIZE;
             gameScreen.obj[7].worldX = 18 * GameScreen.TILE_SIZE;
-            gameScreen.obj[8]=new MovingObstacles(9);
+            gameScreen.obj[8]=new MovingObstacles(11);
             gameScreen.obj[8].worldY = 10 * GameScreen.TILE_SIZE;
             gameScreen.obj[8].worldX = 18 * GameScreen.TILE_SIZE;
         }

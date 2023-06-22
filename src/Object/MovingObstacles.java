@@ -21,7 +21,7 @@ public class MovingObstacles extends GameObject
         collision = true;
         this.num = num;
 
-        if (num == 9 || num == 10) {
+        if (num == 9 || num == 10 || num == 11) {
             solidAreaDefaultX = 15;
             solidAreaDefaultY = 9;
             solidArea.width = 13;
