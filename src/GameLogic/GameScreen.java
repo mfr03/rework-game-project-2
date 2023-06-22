@@ -20,11 +20,11 @@ public class GameScreen extends JPanel implements Runnable
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMNS;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
     // game mechanics
-    public static String currentLevel = "dragan";
+    public static String currentLevel = "edi";
     public ArrayList<String> nextLevel = new ArrayList<>()
     {{
-        add("viko");
         add("dragan");
+        add("viko");
     }};
     final int FPS = 60;
     Thread gameThread;
@@ -46,8 +46,9 @@ public class GameScreen extends JPanel implements Runnable
 
     public static int gameState;
     public final int titleState = 0;
+    public final int endState = -1;
 
-    public OpeningTitle op = new OpeningTitle( this);
+    public TitleScreen op = new TitleScreen( this);
 
     public GameScreen()
     {
@@ -59,6 +60,7 @@ public class GameScreen extends JPanel implements Runnable
         // listening key inputs from this object
         this.addKeyListener(inputHandler);
         this.setFocusable(true);
+        MusicPlayer.playMusic("assets/megaman.wav");
     }
     public void setGame()
     {
@@ -117,30 +119,49 @@ public class GameScreen extends JPanel implements Runnable
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         tileSetter.draw(g2d);
-
-        for(int i = 0; i < obj.length; i++)
-        {
-            if (obj[i] != null)
-            {
-                obj[i].moveObj(obj,i);
-                obj[i].draw(g2d,this);
-            }
-        }
-
-        playerSprite.draw(g2d);
         if(gameState == titleState)
         {
+            for(int i = 0; i < obj.length; i++)
+            {
+                if (obj[i] != null)
+                {
+                    obj[i].draw(g2d,this);
+                }
+            }
+
             op.startTitle(g2d);
 
             if(inputHandler.xKey)
             {
                 gameState = 1;
             }
+        }
+        else if(gameState == endState)
+        {
+            for(int i = 0; i < obj.length; i++)
+            {
+                if (obj[i] != null)
+                {
+                    obj[i].draw(g2d,this);
+                }
+            }
+            playerSprite.draw(g2d);
+            op.startEndTitle(g2d);
+        }
+        else
+        {
+            for(int i = 0; i < obj.length; i++)
+            {
+                if (obj[i] != null)
+                {
+                    obj[i].moveObj(obj,i);
+                    obj[i].draw(g2d,this);
+                }
+            }
+
+            playerSprite.draw(g2d);
 
         }
-
-
-
         g2d.dispose();
     }
 }

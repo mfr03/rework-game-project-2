@@ -52,6 +52,11 @@ public class PlayerSprite extends Sprite
             worldX = GameScreen.TILE_SIZE * 1;
             worldY = GameScreen.TILE_SIZE * 18;
         }
+        else if(level.equals("edi"))
+        {
+            worldX = GameScreen.TILE_SIZE * 1;
+            worldY = GameScreen.TILE_SIZE * 3/2;
+        }
     }
 
     public void update()
@@ -177,7 +182,7 @@ public class PlayerSprite extends Sprite
             }
             catch(IndexOutOfBoundsException e)
             {
-                GameScreen.gameState = 0;
+                GameScreen.gameState = -1;
             }
             finally
             {
@@ -218,17 +223,44 @@ public class PlayerSprite extends Sprite
     private void respawnPlayer(String level)
     {
         isPepsi = false;
+        System.out.println(inputHandler.mark);
+        if(inputHandler.mark)
+        {
+            if(level.equals("viko"))
+            {
+                worldX = GameScreen.TILE_SIZE * 2;
+                worldY = GameScreen.TILE_SIZE * 10;
+            }
+            else if(level.equals("dragan"))
+            {
+                worldX = GameScreen.TILE_SIZE * 14;
+                worldY = GameScreen.TILE_SIZE * 12;
+            }
+            else if(level.equals("edi"))
+            {
+                worldX = GameScreen.TILE_SIZE * 2;
+                worldY = GameScreen.TILE_SIZE * 18;
+            }
+        }
+        else
+        {
+            if(level.equals("viko"))
+            {
+                worldX = GameScreen.TILE_SIZE * 2;
+                worldY = GameScreen.TILE_SIZE * 17;
+            }
+            else if(level.equals("dragan"))
+            {
+                worldX = GameScreen.TILE_SIZE * 1;
+                worldY = GameScreen.TILE_SIZE * 18;
+            }
+            else if(level.equals("edi"))
+            {
+                worldX = GameScreen.TILE_SIZE * 1;
+                worldY = GameScreen.TILE_SIZE * 3/2;
+            }
+        }
 
-        if(level.equals("viko"))
-        {
-            worldX = GameScreen.TILE_SIZE * 2;
-            worldY = GameScreen.TILE_SIZE * 17;
-        }
-        else if(level.equals("dragan"))
-        {
-            worldX = GameScreen.TILE_SIZE * 1;
-            worldY = GameScreen.TILE_SIZE * 18;
-        }
     }
 
     public void draw(Graphics2D g2d)
