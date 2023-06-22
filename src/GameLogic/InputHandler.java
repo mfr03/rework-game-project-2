@@ -8,9 +8,8 @@ import java.util.Set;
 public class InputHandler implements KeyListener
 {
     public boolean isUp, isDown, isLeft, isRight;
-    public boolean fKey, gKey;
+    public boolean xKey;
 
-    public boolean upArrow, downArrow, rightArrow, leftArrow;
 
     public Set<Integer> keys = new HashSet<Integer>();
     @Override
@@ -25,44 +24,41 @@ public class InputHandler implements KeyListener
         keys.add(eKey);
         multiKeys();
     }
+
     private void multiKeys()
     {
-        for(Integer key: keys)
+        if(GameScreen.gameState != 0)
         {
-            switch(key)
+            for(Integer key: keys)
             {
-                case KeyEvent.VK_W:
-                    isUp = true;
-                    break;
-                case KeyEvent.VK_S:
-                    isDown = true;
-                    break;
-                case KeyEvent.VK_A:
-                    isLeft = true;
-                    break;
-                case KeyEvent.VK_D:
-                    isRight = true;
-                    break;
-                case KeyEvent.VK_F:
-                    fKey = true;
-                    break;
-                case KeyEvent.VK_G:
-                    gKey = true;
-                    break;
-                case KeyEvent.VK_UP:
-                    upArrow = true;
-                    break;
-                case KeyEvent.VK_DOWN:
-                    downArrow = true;
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    rightArrow = true;
-                    break;
-                case KeyEvent.VK_LEFT:
-                    leftArrow = true;
-                    break;
+                switch(key)
+                {
+                    case KeyEvent.VK_W, KeyEvent.VK_UP:
+                        isUp = true;
+                        break;
+                    case KeyEvent.VK_S, KeyEvent.VK_DOWN:
+                        isDown = true;
+                        break;
+                    case KeyEvent.VK_A, KeyEvent.VK_LEFT:
+                        isLeft = true;
+                        break;
+                    case KeyEvent.VK_D, KeyEvent.VK_RIGHT:
+                        isRight = true;
+                        break;
+                }
             }
         }
+        else
+        {
+            for(Integer key: keys)
+            {
+                if(key == KeyEvent.VK_X)
+                {
+                    GameScreen.gameState = 1;
+                }
+            }
+        }
+
     }
     @Override
     public void keyReleased(KeyEvent e)
@@ -72,35 +68,20 @@ public class InputHandler implements KeyListener
         keys.remove(eKey);
         switch(eKey)
         {
-            case KeyEvent.VK_W:
+            case KeyEvent.VK_W, KeyEvent.VK_UP:
                 isUp = false;
                 break;
-            case KeyEvent.VK_S:
+            case KeyEvent.VK_S, KeyEvent.VK_DOWN:
                 isDown = false;
                 break;
-            case KeyEvent.VK_A:
+            case KeyEvent.VK_A, KeyEvent.VK_LEFT:
                 isLeft = false;
                 break;
-            case KeyEvent.VK_D:
+            case KeyEvent.VK_D, KeyEvent.VK_RIGHT:
                 isRight = false;
                 break;
-            case KeyEvent.VK_F:
-                fKey = false;
-                break;
-            case KeyEvent.VK_G:
-                gKey = false;
-                break;
-            case KeyEvent.VK_UP:
-                upArrow = false;
-                break;
-            case KeyEvent.VK_DOWN:
-                downArrow = false;
-                break;
-            case KeyEvent.VK_RIGHT:
-                rightArrow = false;
-                break;
-            case KeyEvent.VK_LEFT:
-                leftArrow = false;
+            case KeyEvent.VK_X:
+                xKey = false;
                 break;
         }
 

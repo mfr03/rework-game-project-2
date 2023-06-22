@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Sprite
+public abstract class Sprite
 {
     public int worldX, worldY;
     public int speed;
@@ -17,5 +17,7 @@ public class Sprite
     public int solidAreaDefaultX;
     public int solidAreaDefaultY;
     public Boolean collisionOn = false;
+
+    public abstract void draw(Graphics2D g2d);
 
 }

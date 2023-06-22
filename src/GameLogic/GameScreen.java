@@ -6,6 +6,7 @@ import Object.MovingObstacles;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GameScreen extends JPanel implements Runnable
 {
@@ -18,9 +19,13 @@ public class GameScreen extends JPanel implements Runnable
     public static final int MAX_SCREEN_ROWS = 12;
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMNS;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
-
     // game mechanics
-    public String nextLevel = "viko";
+    public static String currentLevel = "dragan";
+    public ArrayList<String> nextLevel = new ArrayList<>()
+    {{
+        add("viko");
+        add("dragan");
+    }};
     final int FPS = 60;
     Thread gameThread;
     InputHandler inputHandler = new InputHandler();
@@ -39,7 +44,10 @@ public class GameScreen extends JPanel implements Runnable
     public final int worldWidth = TILE_SIZE * MAX_WORLD_COL;
     public final int worldHeight = TILE_SIZE * MAX_WORLD_ROW;
 
+    public static int gameState;
+    public final int titleState = 0;
 
+    public OpeningTitle op = new OpeningTitle( this);
 
     public GameScreen()
     {
@@ -54,7 +62,8 @@ public class GameScreen extends JPanel implements Runnable
     }
     public void setGame()
     {
-        objectSetter.setObject();
+        objectSetter.setObject(currentLevel);
+        gameState = titleState;
     }
     /*
     when instantiate gameThread and starting it,
@@ -107,20 +116,30 @@ public class GameScreen extends JPanel implements Runnable
     {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
         tileSetter.draw(g2d);
 
         for(int i = 0; i < obj.length; i++)
         {
-            if(obj[i] != null)
+            if (obj[i] != null)
             {
-                obj[i].moveObj(obj, i);
+                obj[i].moveObj(obj,i);
                 obj[i].draw(g2d,this);
             }
         }
-        System.out.println(playerSprite.finished);
-        System.out.println(playerSprite.collisionOn);
+
         playerSprite.draw(g2d);
+        if(gameState == titleState)
+        {
+            op.startTitle(g2d);
+
+            if(inputHandler.xKey)
+            {
+                gameState = 1;
+            }
+
+        }
+
+
 
         g2d.dispose();
     }

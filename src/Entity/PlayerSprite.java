@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class PlayerSprite extends Sprite
 {
-    GameScreen gameScreen;
-    InputHandler inputHandler;
+    private GameScreen gameScreen;
+    private InputHandler inputHandler;
 
     public final int screenX;
     public final int screenY;
@@ -32,22 +32,7 @@ public class PlayerSprite extends Sprite
         solidArea.width = 32;
         solidArea.height = 32;
 
-        setDefaultValues();
-    }
-
-    public void setDefaultValues()
-    {
-        worldX = GameScreen.TILE_SIZE * 2;
-        worldY = GameScreen.TILE_SIZE * 2;
-        speed = 4;
-        spriteFiles = Util.loadFileToHashMap();
-        isPepsi = false;
-        finished = false;
-        direction = "down";
-
-//        //map33
-//        worldX = GameScreen.TILE_SIZE * 2;
-//        worldY = GameScreen.TILE_SIZE * 17;
+        setDefaultValues(gameScreen.currentLevel);
     }
 
     public void setDefaultValues(String level)
@@ -57,13 +42,18 @@ public class PlayerSprite extends Sprite
         isPepsi = false;
         finished = false;
         direction = "down";
-        if(level.equals("viko"))
+
+        if (level.equals("viko"))
         {
-            //map33
             worldX = GameScreen.TILE_SIZE * 2;
             worldY = GameScreen.TILE_SIZE * 17;
+        } else if (level.equals("dragan"))
+        {
+            worldX = GameScreen.TILE_SIZE * 1;
+            worldY = GameScreen.TILE_SIZE * 18;
         }
     }
+
     public void update()
     {
         if((inputHandler.isUp || inputHandler.isDown || inputHandler.isLeft || inputHandler.isRight) && !isPepsi)
@@ -153,7 +143,6 @@ public class PlayerSprite extends Sprite
             int objIndex = gameScreen.checkCollision.checkObjectIdle(this,true);
             if(objIndex != 999)
             {
-                System.out.println("collided");
                 deathSequence();
             }
 
@@ -182,10 +171,25 @@ public class PlayerSprite extends Sprite
         }
         if(finished)
         {
-            gameScreen.tileSetter.loadMap(gameScreen.nextLevel);
-            gameScreen.objectSetter.setObject(gameScreen.nextLevel);
-            gameScreen.playerSprite.respawnPlayer(gameScreen.nextLevel);
-            gameScreen.playerSprite.finished = false;
+            try
+            {
+                gameScreen.currentLevel = gameScreen.nextLevel.get(0);
+            }
+            catch(IndexOutOfBoundsException e)
+            {
+                GameScreen.gameState = 0;
+            }
+            finally
+            {
+                gameScreen.tileSetter.loadMap(gameScreen.currentLevel);
+                gameScreen.objectSetter.setObject(gameScreen.currentLevel);
+                gameScreen.playerSprite.respawnPlayer(gameScreen.currentLevel);
+                if(gameScreen.nextLevel.size() != 0)
+                {
+                    gameScreen.nextLevel.remove(0);
+                }
+                gameScreen.playerSprite.finished = false;
+            }
         }
     }
 
@@ -202,54 +206,6 @@ public class PlayerSprite extends Sprite
             }
         }
     }
-//    private void movePlayer(int objectIndex)
-//    {
-//        if(collisionOn)
-//        {
-//            switch (direction)
-//            {
-//                case "idleTop", "up" ->
-//                {
-//                    if (inputHandler.fKey || inputHandler.upArrow)
-//                    {
-//                        worldY -= speed;
-//                        gameScreen.obj[objectIndex].worldY -= GameScreen.TILE_SIZE;
-//                    }
-//                }
-//                case "idle", "down" ->
-//                {
-//                    if (inputHandler.fKey || inputHandler.downArrow)
-//                    {
-//                        worldY += speed;
-//                        gameScreen.obj[objectIndex].worldY += GameScreen.TILE_SIZE;
-//                    }
-//                }
-//                case "idleRight", "right" ->
-//                {
-//                    if (inputHandler.fKey || inputHandler.rightArrow)
-//                    {
-//                        worldX += speed;
-//                        gameScreen.obj[objectIndex].worldX += GameScreen.TILE_SIZE;
-//                    }
-//                }
-//                case "idleLeft", "left" ->
-//                {
-//                    if (inputHandler.fKey || inputHandler.leftArrow)
-//                    {
-//                        worldX -= speed;
-//                        gameScreen.obj[objectIndex].worldX -= GameScreen.TILE_SIZE;
-//                    }
-//                }
-//            }
-//        }
-//    }
-//    private void objectInteraction(int objectIndex)
-//    {
-//        if(objectIndex != 999)
-//        {
-//            movePlayer(objectIndex);
-//        }
-//    }
 
     private void deathSequence()
     {
@@ -258,16 +214,6 @@ public class PlayerSprite extends Sprite
         spriteNum = 0;
     }
 
-    private void respawnPlayer()
-    {
-//        worldX = GameScreen.TILE_SIZE * 2;
-//        worldY = GameScreen.TILE_SIZE * 2;
-        isPepsi = false;
-
-        //map33
-        worldX = GameScreen.TILE_SIZE * 2;
-        worldY = GameScreen.TILE_SIZE * 17;
-    }
 
     private void respawnPlayer(String level)
     {
@@ -277,6 +223,11 @@ public class PlayerSprite extends Sprite
         {
             worldX = GameScreen.TILE_SIZE * 2;
             worldY = GameScreen.TILE_SIZE * 17;
+        }
+        else if(level.equals("dragan"))
+        {
+            worldX = GameScreen.TILE_SIZE * 1;
+            worldY = GameScreen.TILE_SIZE * 18;
         }
     }
 
@@ -320,7 +271,7 @@ public class PlayerSprite extends Sprite
             {
                 direction = "idle";
                 spriteNum = 0;
-                respawnPlayer();
+                respawnPlayer(gameScreen.currentLevel);
             }
         }
     }
