@@ -8,5 +8,5 @@ Game ini memiliki tingkat kesulitan yang cukup tinggi. Pemain harus memiliki ref
 # Kontributor
 - Maulana Fikrie Rizaldi 
 - Prasetyo Edi Pamungkas
-- Viko Rivangesta
+- Viko Rivanesta
 - Dragan Abrisam

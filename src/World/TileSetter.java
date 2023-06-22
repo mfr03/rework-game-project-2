@@ -36,6 +36,8 @@ public class TileSetter
         tiles[3] = new Tile();
         tiles[3].image = new ImageIcon("assets/2770921.png").getImage();
         tiles[3].collision = true;
+        tiles[14] = new Tile();
+        tiles[14].image = new ImageIcon("assets/backgrounds/floor_2.png").getImage();
         tiles[15] = new Tile();
         tiles[15].image = new ImageIcon("assets/backgrounds/floor_1.png").getImage();
         tiles[16] = new Tile();
@@ -47,6 +49,9 @@ public class TileSetter
         tiles[18] = new Tile();
         tiles[18].image = new ImageIcon("assets/backgrounds/floor_ladder.png").getImage();
         tiles[18].collision = true;
+        tiles[19] = new Tile();
+        tiles[19].image = new ImageIcon("assets/backgrounds/wall_mid_broken.png").getImage();
+        tiles[19].collision = true;
         tiles[20] = new Tile();
         tiles[20].image = new ImageIcon("assets/backgrounds/wall_left_end.png").getImage();
         tiles[20].collision = true;
