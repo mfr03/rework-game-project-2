@@ -181,7 +181,7 @@ public class MovingObstacles extends GameObject
                 }
             }
         }
-        else if(GameScreen.currentLevel.equals("viko"))
+        else if(GameScreen.currentLevel.equals("viko") || GameScreen.currentLevel.equals("edi"))
         {
             if(num == 9)
             {
@@ -233,6 +233,7 @@ public class MovingObstacles extends GameObject
                 }
             }
         }
+
 
     }
 }

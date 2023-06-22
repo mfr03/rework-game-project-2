@@ -9,6 +9,7 @@ public class InputHandler implements KeyListener
 {
     public boolean isUp, isDown, isLeft, isRight;
     public boolean xKey;
+    public boolean mark;
 
 
     public Set<Integer> keys = new HashSet<Integer>();
@@ -44,6 +45,9 @@ public class InputHandler implements KeyListener
                         break;
                     case KeyEvent.VK_D, KeyEvent.VK_RIGHT:
                         isRight = true;
+                        break;
+                    case KeyEvent.VK_9:
+                        mark = true;
                         break;
                 }
             }
@@ -82,6 +86,9 @@ public class InputHandler implements KeyListener
                 break;
             case KeyEvent.VK_X:
                 xKey = false;
+                break;
+            case KeyEvent.VK_9:
+                mark = false;
                 break;
         }
 

@@ -109,7 +109,6 @@ public class CheckCollision
                         sprite.solidArea.y -= sprite.speed;
                         if(sprite.solidArea.intersects(gameScreen.obj[i].solidArea))
                         {
-                            System.out.println(sprite.direction);
                             if(gameScreen.obj[i].collision)
                             {
                                 sprite.collisionOn = true;
