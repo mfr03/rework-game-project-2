@@ -198,7 +198,7 @@ public class CheckCollision
                     if(tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
-                        gameScreen.nextLevel = "ulana";
+                        gameScreen.nextLevel = "level1";
                     }
                     if(tileNum1 == 3 || tileNum2 == 3)
                     {
@@ -217,7 +217,7 @@ public class CheckCollision
                     if(tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
-                        gameScreen.nextLevel = "ulana";
+                        gameScreen.nextLevel = "level1";
                     }
                     if(tileNum1 == 3 || tileNum2 == 3)
                     {
@@ -236,7 +236,7 @@ public class CheckCollision
                     if(tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
-                        gameScreen.nextLevel = "ulana";
+                        gameScreen.nextLevel = "level1";
                     }
                     if(tileNum1 == 3 || tileNum2 == 3)
                     {
@@ -255,7 +255,7 @@ public class CheckCollision
                     if(tileNum1 == 18 || tileNum2 == 18)
                     {
                         gameScreen.playerSprite.finished = true;
-                        gameScreen.nextLevel = "ulana";
+                        gameScreen.nextLevel = "level1";
                     }
                     if(tileNum1 == 3 || tileNum2 == 3)
                     {

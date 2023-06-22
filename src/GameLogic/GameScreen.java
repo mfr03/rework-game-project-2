@@ -54,7 +54,7 @@ public class GameScreen extends JPanel implements Runnable
     }
     public void setGame()
     {
-        objectSetter.setObject();
+        objectSetter.setObject("level1");
     }
     /*
     when instantiate gameThread and starting it,

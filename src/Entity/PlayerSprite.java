@@ -265,8 +265,10 @@ public class PlayerSprite extends Sprite
         isPepsi = false;
 
         //map33
+//        worldX = GameScreen.TILE_SIZE * 2;
+//        worldY = GameScreen.TILE_SIZE * 17;
         worldX = GameScreen.TILE_SIZE * 2;
-        worldY = GameScreen.TILE_SIZE * 17;
+        worldY = GameScreen.TILE_SIZE * 2;
     }
 
     private void respawnPlayer(String level)

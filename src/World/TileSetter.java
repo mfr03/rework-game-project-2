@@ -81,7 +81,7 @@ public class TileSetter
     {
         try
         {
-            InputStream is =getClass().getResourceAsStream("ulana.txt");
+            InputStream is =getClass().getResourceAsStream("level1.txt");
 
             BufferedReader br = new BufferedReader( new InputStreamReader(is));
 
